@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     if (Auth::check()) {
-        return redirect()->route('home');
+        return redirect()->action('TopicController@index');
     }
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'TopicController@index')->name('home');
+Route::resource('topics', 'TopicController');

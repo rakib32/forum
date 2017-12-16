@@ -19,6 +19,8 @@ class CreateTopicsTable extends Migration
             $table->longText('content');
             $table->integer('category_id')->unsigned();
             $table->integer('created_by_user_id')->unsigned();
+
+            $table->softDeletes();
             $table->timestamps();
         });
 

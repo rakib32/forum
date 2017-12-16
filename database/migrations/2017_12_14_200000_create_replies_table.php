@@ -19,6 +19,7 @@ class CreateRepliesTable extends Migration
             $table->integer('topic_id')->unsigned();
             $table->integer('created_by_user_id')->unsigned();
             $table->integer('parent_reply_id')->unsigned()->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
 

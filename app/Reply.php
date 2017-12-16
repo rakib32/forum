@@ -6,19 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Validator;
 
-class Topic extends Model
+class Reply extends Model
 {
     use SoftDeletes;
-    protected $table = 'topics';
+    protected $table = 'replies';
     protected $guarded = ['id'];
-    protected $fillable = ['title','content','category_id'];
+    protected $fillable = ['content','topic_id', 'parent_reply_id'];
 
     protected $hidden = ['deleted_at','created_at','updated_at'];
 
     protected static $rules = [
-        'title' => 'required',
         'content' => 'required',
-        'category_id' => 'required|exists:categories,id',
+        'topic_id' => 'required|exists:topics,id',
         'created_by_user_id' => 'required|exists:users,id'
     ];
 
@@ -54,18 +53,8 @@ class Topic extends Model
         return $this->belongsTo('App\User','created_by_user_id');
     }
 
-    public function category()
+    public function topic()
     {
-        return $this->belongsTo('App\Category','category_id');
-    }
-
-    public function replies()
-    {
-        return $this->hasMany('App\Reply','topic_id');
-    }
-
-    public function getRepliesCountAttribute()
-    {
-        return $this->replies ? $this->replies->count : 0;
+        return $this->belongsTo('App\Topic','topic_id');
     }
 }
