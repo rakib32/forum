@@ -1,8 +1,8 @@
-<table class="table table-bordered">
+<table class="table table-responsive table-striped">
     <tr>
         <th>Id</th>
         <th>Title</th>
-        <th>Reply Count</th>
+        <th>Replies Count</th>
         <th width="280px">Action</th>
     </tr>
     @if (count($topics) > 0)
@@ -10,14 +10,11 @@
             <tr>
                 <td>{{ $topic->id }}</td>
                 <td>{{ $topic->title}}</td>
-                <td>{{ $topic->getRepliesCount()}}</td>
+                <td>{{ $topic->count_replies}}</td>
                 <td>
-                    <a class="btn btn-info" href="{{ route('topics.show',$article->id) }}">Show</a>
+                    <a class="btn btn-primary" href="{{ route('topics.show', $topic->id) }}">Show Replies</a>
                     @if (Auth::user()->id = $topic->created_by_user_id)
-                        <a class="btn btn-primary" href="{{ route('topics.edit',$article->id) }}">Edit</a>
-                        {!! Form::open(['method' => 'DELETE','route' => ['topics.destroy', $article->id],'style'=>'display:inline']) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                        {!! Form::close() !!}
+                        <a class="btn btn-primary" href="{{ route('topics.edit', $topic->id) }}">Edit</a>
                     @endif
                 </td>
             </tr>

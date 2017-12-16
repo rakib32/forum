@@ -61,6 +61,12 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required|exists:categories,id'
+        ]);
+
         $topic = $this->topicService->addTopic($request);
 
         return redirect()->route('topics.index')
@@ -100,6 +106,12 @@ class TopicController extends Controller
      */
     public function update(Request $request, $id)
     {
+        request()->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required|exists:categories,id'
+        ]);
+
         $topic = $this->topicService->updateTopic($request, $id);
 
         return redirect()->route('topics.index')

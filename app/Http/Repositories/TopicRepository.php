@@ -37,7 +37,7 @@ class TopicRepository
         $data = $request->all();
         $data['created_by_user_id'] = Auth::id();
 
-        $topic = Topic::create();
+        $topic = Topic::create($data);
         return $topic;
     }
 

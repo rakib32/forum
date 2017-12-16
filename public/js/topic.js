@@ -6,11 +6,13 @@ var topic = function () {
             $('body').on('click', '.pagination a', function (e) {
                 e.preventDefault();
 
-                $('.topics a').css('color', '#dfecf6');
-                $('.topics').append('<img  width="100px" position: absolute; left: 0; top: 0; z-index: 100000;" src="/images/loading.gif" />');
+                $('.topic-table a').css('color', '#dfecf6');
 
                 var url = $(this).attr('href');
+                url = url + "&category_id=" + $(".select-category").val();
+
                 thisControl.getTopics(url);
+
                 window.history.pushState("", "", url);
             });
 
@@ -24,7 +26,7 @@ var topic = function () {
             $.ajax({
                 url: url
             }).done(function (data) {
-                $('.topics').html(data);
+                $('.topic-table').html(data);
             }).fail(function () {
                 alert('Topics could not be loaded.');
             });

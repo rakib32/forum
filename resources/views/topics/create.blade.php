@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container">
-
         <div class="row">
             <div class="col-lg-12 margin-tb">
 
@@ -13,8 +12,8 @@
                     <a class="btn btn-primary" href="{{ route('topics.index') }}"> Back</a>
                 </div>
 
-                @if (count($errors) < 0)
-                    <div class="alert alert-danger">
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger clear">
                         <strong>Whoops!</strong> There were some problems with your input.<br><br>
                         <ul>
                             @foreach ($errors->all() as $error)

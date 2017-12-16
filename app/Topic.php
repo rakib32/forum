@@ -11,61 +11,34 @@ class Topic extends Model
     use SoftDeletes;
     protected $table = 'topics';
     protected $guarded = ['id'];
-    protected $fillable = ['title','content','category_id'];
+    protected $fillable = ['title', 'content', 'category_id', 'created_by_user_id'];
 
-    protected $hidden = ['deleted_at','created_at','updated_at'];
+    protected $hidden = ['deleted_at', 'created_at', 'updated_at'];
 
-    protected static $rules = [
-        'title' => 'required',
-        'content' => 'required',
-        'category_id' => 'required|exists:categories,id',
-        'created_by_user_id' => 'required|exists:users,id'
-    ];
-
-    protected static $messages = [
-        'required' => 'The :attribute field is required.',
-        'exists' => 'The :attribute doesnt exist'
-    ];
-
-    public static function boot()
-    {
-        parent::boot();
-        static::creating(function ($report) {
-            if ( ! $report->isValid()) {
-                return false;
-            }
-        });
-    }
-
-    public function isValid()
-    {
-        $v = Validator::make($this->getAttributes(), static::$rules, static::$messages);
-
-        if($v->fails()){
-            $this->errors = $v->messages();
-            return false;
-        }
-
-        return true;
-    }
+    protected $appends = ['count_replies'];
 
     public function created_by_user()
     {
-        return $this->belongsTo('App\User','created_by_user_id');
+        return $this->belongsTo('App\User', 'created_by_user_id');
     }
 
     public function category()
     {
-        return $this->belongsTo('App\Category','category_id');
+        return $this->belongsTo('App\Category', 'category_id');
     }
 
     public function replies()
     {
-        return $this->hasMany('App\Reply','topic_id');
+        return $this->hasMany('App\Reply', 'topic_id');
     }
 
-    public function getRepliesCountAttribute()
+    public function setRepliesCountAttribute($value)
     {
-        return $this->replies ? $this->replies->count : 0;
+        $this->attributes['replies_count'] = Carbon::createFromFormat('m/d/Y', $value)->toDateString();
+    }
+
+    public function getCountRepliesAttribute()
+    {
+        return ($this->replies ? $this->replies->count() : 0);
     }
 }
