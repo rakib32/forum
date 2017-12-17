@@ -32,11 +32,6 @@ class Topic extends Model
         return $this->hasMany('App\Reply', 'topic_id');
     }
 
-    public function setRepliesCountAttribute($value)
-    {
-        $this->attributes['replies_count'] = Carbon::createFromFormat('m/d/Y', $value)->toDateString();
-    }
-
     public function getCountRepliesAttribute()
     {
         return ($this->replies ? $this->replies->count() : 0);

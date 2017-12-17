@@ -23,3 +23,5 @@ Auth::routes();
 
 Route::get('/home', 'TopicController@index')->name('home');
 Route::resource('topics', 'TopicController');
+Route::get('/topics/{id}/replies', 'ReplyController@index')->name('replies.index');
+Route::post('/replies', 'ReplyController@store')->name('replies.store');

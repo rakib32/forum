@@ -12,7 +12,7 @@
                 <td>{{ $topic->title}}</td>
                 <td>{{ $topic->count_replies}}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('topics.show', $topic->id) }}">Show Replies</a>
+                    <a class="btn btn-primary" href="{{ route('replies.index', $topic->id) }}">Show Replies</a>
                     @if (Auth::user()->id = $topic->created_by_user_id)
                         <a class="btn btn-primary" href="{{ route('topics.edit', $topic->id) }}">Edit</a>
                     @endif

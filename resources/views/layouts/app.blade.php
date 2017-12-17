@@ -80,6 +80,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/topic.js') }}"></script>
+    <script src="{{ asset('js/reply.js') }}"></script>
     <script src="{{ asset('js/loading-box.js') }}"></script>
 </body>
 </html>
