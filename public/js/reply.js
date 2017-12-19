@@ -21,6 +21,12 @@ var reply = function () {
 
                 thisControl.saveReply(url);
             });
+
+            $(".reply-content").summernote({
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']]
+                ]
+            });
         },
         getReplies: function (url) {
             $.ajax({

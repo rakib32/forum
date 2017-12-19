@@ -21,6 +21,12 @@ var topic = function () {
                 var url = "/topics?category_id=" + categoryId;
                 thisControl.getTopics(url);
             });
+
+            $(".topic-editor").summernote({
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']]
+                ]
+            });
         },
         getTopics: function (url) {
             $.ajax({

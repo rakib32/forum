@@ -9,14 +9,14 @@
         <strong>Select Category:</strong>
         <select class="form-control" name="category_id">
             @foreach($categories as $category)
-                <option value="{{$category->id}}">{{$category->name}}</option>
+                <option {{ $topic != null && $topic->category_id == $category->id  ? "selected" : "" }} value="{{$category->id}}">{{$category->name}}</option>
             @endforeach
         </select>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Content:</strong>
-            {!! Form::textarea('content', null, array('placeholder' => 'Content','class' => 'form-control','style'=>'height:150px')) !!}
+            {!! Form::textarea('content', null, array('placeholder' => 'Content','class' => 'form-control topic-editor','style'=>'height:350px')) !!}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">

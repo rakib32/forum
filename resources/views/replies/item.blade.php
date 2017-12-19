@@ -1,5 +1,5 @@
 <div class="reply-item">
-    <strong>{{$reply->created_by_user->name}} Says:</strong>
+    <h4><strong>{{$reply->created_by_user->name}} Says:</strong></h4>
 
-    <p>{{$reply->content}}</p>
+    <p>{!! $reply->content !!}</p>
 </div>
