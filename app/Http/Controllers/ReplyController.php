@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReplyRequest;
 use Illuminate\Http\Request;
 use App\Http\Services\ReplyService;
 use App\Http\Services\TopicService;
@@ -48,13 +49,8 @@ class ReplyController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReplyRequest $request)
     {
-        request()->validate([
-            'content' => 'required',
-            'topic_id' => 'required|exists:topics,id'
-        ]);
-
         $reply = $this->replyService->addReply($request);
 
         if (request()->ajax()) {

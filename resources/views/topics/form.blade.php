@@ -9,7 +9,7 @@
         <strong>Select Category:</strong>
         <select class="form-control" name="category_id">
             @foreach($categories as $category)
-                <option {{ $topic != null && $topic->category_id == $category->id  ? "selected" : "" }} value="{{$category->id}}">{{$category->name}}</option>
+                <option {{ isset($topic) && $topic->category_id == $category->id  ? "selected" : "" }} value="{{$category->id}}">{{$category->name}}</option>
             @endforeach
         </select>
     </div>

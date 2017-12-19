@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TopicRequest;
 use Illuminate\Http\Request;
 use App\Http\Services\TopicService;
 use App\Http\Services\CategoryService;
@@ -59,14 +60,8 @@ class TopicController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TopicRequest $request)
     {
-        request()->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'category_id' => 'required|exists:categories,id'
-        ]);
-
         $topic = $this->topicService->addTopic($request);
 
         return redirect()->route('topics.index')
@@ -104,14 +99,8 @@ class TopicController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TopicRequest $request, $id)
     {
-        request()->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'category_id' => 'required|exists:categories,id'
-        ]);
-
         $topic = $this->topicService->updateTopic($request, $id);
 
         return redirect()->route('topics.index')

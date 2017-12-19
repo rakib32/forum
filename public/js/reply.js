@@ -19,7 +19,11 @@ var reply = function () {
                 e.preventDefault(e);
                 var url = $(this).attr("action");
 
-                thisControl.saveReply(url);
+                if ($('.reply-content').val()) {
+                    thisControl.saveReply(url);
+                }else{
+                    alert("Content is required");
+                }
             });
 
             $(".reply-content").summernote({
@@ -45,7 +49,7 @@ var reply = function () {
                 data: $('#reply-form').serialize()
             }).done(function (data) {
                 $('.reply-list').prepend(data);
-                $(".reply-content").val();
+                $(".reply-content").val("");
             }).fail(function () {
                 alert('Replies could not be loaded.');
             });

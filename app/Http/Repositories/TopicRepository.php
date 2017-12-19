@@ -22,10 +22,12 @@ class TopicRepository
         if ($categoryId > 0) {
             $topics = Topic::with('category', 'created_by_user')
                 ->where('category_id', '=', $categoryId)
+                ->latest()
                 ->paginate($limit);
         } else {
 
             $topics = Topic::with('category', 'created_by_user')
+                ->latest()
                 ->paginate($limit);
         }
 
