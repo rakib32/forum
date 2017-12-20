@@ -6,6 +6,7 @@
   * Pull the repository to your local directory
   * Rename the `.env.example` file to `.env`
   * Change the mysql credentials with your  mysql user and password in `.env` file
+  * Please also change the `DB_HOST=mysql`(as i was using docker) to `DB_HOST=127.0.0.1`
   * Generate application key using following command:
       ```php artisan key:generate```
   * Go to your local directory and run composer command to install all dependecies:  
